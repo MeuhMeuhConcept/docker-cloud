@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  cloud:
+    image: scality/s3server
+    volumes:
+      - ./config.json:/usr/src/app/config.json
+      - ./authdata.json:/usr/src/app/conf/authdata.json
+      - ./data:/usr/src/app/localData
+      - ./metadata:/usr/src/app/localMetaData
+    deploy:
+      restart_policy:
+        condition: on-failure

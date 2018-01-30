@@ -1,0 +1,49 @@
+{
+    "port": 8000,
+    "listenOn": [],
+    "replicationGroupId": "RG001",
+    "restEndpoints": {
+        "{{MY_DOMAIN_NAME}}": "eu-west-1",
+    },
+    "websiteEndpoints": [],
+    "cdmi": {
+        "host": "localhost",
+        "port": 81,
+        "path": "/dewpoint"
+    },
+    "bucketd": {
+        "bootstrap": ["localhost"]
+    },
+    "vaultd": {
+        "host": "localhost",
+        "port": 8500
+    },
+    "clusters": 10,
+    "log": {
+        "logLevel": "info",
+        "dumpLevel": "error"
+    },
+    "healthChecks": {
+        "allowFrom": ["127.0.0.1/8", "::1"]
+    },
+    "metadataClient": {
+        "host": "localhost",
+        "port": 9990
+    },
+    "dataClient": {
+        "host": "localhost",
+        "port": 9991
+    },
+    "metadataDaemon": {
+        "bindAddress": "localhost",
+        "port": 9990
+    },
+    "dataDaemon": {
+        "bindAddress": "localhost",
+        "port": 9991
+    },
+    "recordLog": {
+        "enabled": false,
+        "recordLogName": "s3-recordlog"
+    }
+}
