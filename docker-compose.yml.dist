@@ -10,7 +10,7 @@ services:
               source: cloud_data
               target: /usr/src/app/localData
               volume:
-                  nocpy: true
+                  nocopy: true
             - type: volume
               source: cloud_metadata
               target: /usr/src/app/localMetaData
@@ -32,7 +32,7 @@ services:
 #              source: cloud_data
 #              target: /usr/src/app/localData
 #              volume:
-#                  nocpy: true
+#                  nocopy: true
 #            - type: volume
 #              source: cloud_metadata
 #              target: /usr/src/app/localMetaData
