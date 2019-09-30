@@ -1,13 +1,63 @@
-version: '3.2'
+version: '3.4'
 
 services:
-  cloud:
-    image: scality/s3server
-    volumes:
-      - ./config.json:/usr/src/app/config.json
-      - ./authdata.json:/usr/src/app/conf/authdata.json
-      - ./data:/usr/src/app/localData
-      - ./metadata:/usr/src/app/localMetaData
-    deploy:
-      restart_policy:
-        condition: on-failure
+    cloud:
+        image: scality/s3server
+        volumes:
+            - ./config.json:/usr/src/app/config.json
+            - ./authdata.json:/usr/src/app/conf/authdata.json
+            - type: volume
+              source: cloud_data
+              target: /usr/src/app/localData
+              volume:
+                  nocpy: true
+            - type: volume
+              source: cloud_metadata
+              target: /usr/src/app/localMetaData
+              volume:
+                  nocopy: true
+        deploy:
+            restart_policy:
+                condition: on-failure
+
+#version: '3.4'
+#
+#services:
+#    cloud:
+#        image: scality/s3server
+#        volumes:
+#            - ./config.json:/usr/src/app/config.json
+#            - ./authdata.json:/usr/src/app/conf/authdata.json
+#            - type: volume
+#              source: cloud_data
+#              target: /usr/src/app/localData
+#              volume:
+#                  nocpy: true
+#            - type: volume
+#              source: cloud_metadata
+#              target: /usr/src/app/localMetaData
+#              volume:
+#                  nocopy: true
+#        networks:
+#          - web
+#        deploy:
+#            restart_policy:
+#                condition: on-failure
+#            placement:
+#                constraints:
+#                    - node.role == manager
+#                    - node.hostname == manager1
+#            labels:
+#                - "traefik.backend=cloud.meuhmeuhconcept.fr"
+#                - "traefik.port=8000"
+#                - "traefik.frontend.rule=Host:cloud.meuhmeuhconcept.fr"
+#                - "traefik.docker.network=traefik_net"
+#
+#networks:
+#    web:
+#        external:
+#            name: traefik_net
+#
+#volumes:
+#    cloud_data:
+#    cloud_metadata:
